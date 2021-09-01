@@ -13,7 +13,7 @@
 # limitations under the License.
 
 from flask import Flask,request,render_template
-
+from data.encrypt_URL import *
 app = Flask(__name__)
 
 @app.route("/", methods=['POST','GET'])
@@ -22,7 +22,12 @@ def main():
         page_title = request.form.get('page_title')
         link = request.form.get('link')
         encrypedenabled = request.form.get('encrypedenabled')
+
+        if encrypedenabled == "on":
+            enc = ENCRYPTION.ENCRYPT(link)
+            print(enc)
+        else:
+            print(link)
         print(page_title)
-        print(link)
         print(encrypedenabled)
-    return     render_template("engine.html")
+        return render_template("engine.html")
