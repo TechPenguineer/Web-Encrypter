@@ -12,10 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from flask import *
-
+from flask import Flask,request,render_template
+from data.encrypt_URL import *
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=['POST','GET'])
 def main():
-    return render_template("engine.html")
+    if request.method == 'POST':
+        page_title = request.form.get('page_title')
+        link = request.form.get('link')
+        encrypedenabled = request.form.get('encrypedenabled')
+
+        if encrypedenabled == "on":
+            enc = ENCRYPTION.ENCRYPT(link)
+            print(enc)
+        else:
+            print(link)
+        print(page_title)
+        print(encrypedenabled)
+        return render_template("engine.html")
