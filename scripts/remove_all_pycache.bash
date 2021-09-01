@@ -12,4 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-rm *.pyc
+cd ../
+
+sudo rm __pycache__/*
+sudo rmdir __pycache__
